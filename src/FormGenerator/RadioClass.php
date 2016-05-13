@@ -6,7 +6,7 @@ use FormGenerator\HtmlTemplate\Checkbox;
 use \stdClass;
 
 class RadioClass extends Component{
-		
+
 	public function render($data,$default){
 		$data->type = 'type="'.$data->type.'"';
 		$this->_data->name = null;
@@ -22,7 +22,7 @@ class RadioClass extends Component{
 			}
 			$temp = $this->renderBasic($data,'',$template);
 			$temp = $this->renderInput($temp);
-			$temp = $temp.$each->text;
+			$temp = $temp.'<label>'.$each->text.'</label>';
 			if(isset($each->checked)&&$each->checked==true){
 				$value = 'checked';
 				$temp = str_replace('[checked]',$value,$temp);
@@ -31,7 +31,7 @@ class RadioClass extends Component{
 				$temp = str_replace(' [checked]',$value,$temp);
 			}
 			$result = $result.$temp;
-		}		
+		}
 		return $result;
 	}
 }

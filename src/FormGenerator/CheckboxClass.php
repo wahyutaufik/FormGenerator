@@ -6,14 +6,14 @@ use FormGenerator\HtmlTemplate\Checkbox;
 use \stdClass;
 
 class CheckboxClass extends Component{
-		
+
 	public function render($data,$default){
 		$data->type = 'type="'.$data->type.'"';
 		$data->name = $data->name.'[]';
 		$this->_data->name = null;
 		$this->_data->value = null;
 		$this->_data->placeholder = null;
-		
+
 		$templateObj = new Checkbox();
 		$template = $templateObj->template();
 		$temp = '';
@@ -24,8 +24,8 @@ class CheckboxClass extends Component{
 			}
 			$temp = $this->renderBasic($data,'',$template);
 			$temp = $this->renderInput($temp);
-			$temp = $each->text.$temp;
-			
+			$temp = $temp.'<label>'.$each->text.'</label>';
+
 
 			if(isset($each->checked)&&$each->checked==true){
 				$value = 'checked';
@@ -37,7 +37,7 @@ class CheckboxClass extends Component{
 			$result = $result.$temp;
 		}
 		$wrapper = $templateObj->additionalTag();
-		$result = str_replace('[content]',$result,$wrapper);		
+		$result = str_replace('[content]',$result,$wrapper);
 		return $result;
 	}
 }
